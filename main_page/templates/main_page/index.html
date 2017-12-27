@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Main Page</title>
-</head>
-<body>
+{% extends "main_page/base.html" %}
 
-    <h1>Main Page</h1>
-    <a href="{% url 'login_app:user_logout' %}">logout</a>
-    
-</body>
-</html>
+{% block title_block %}
+  InfoExtracT
+{% endblock title_block %}
+
+{% block main_block %}
+<h1>Main Page</h1>
+<a href="{% url 'login_app:user_logout' %}">logout</a>
+{% endblock main_block %}
