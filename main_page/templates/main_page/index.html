@@ -1,10 +1,110 @@
 {% extends "main_page/base.html" %}
+{% load  staticfiles %}
+
+{% block css_block %}
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/color_changer.css' %}">
+{% endblock css_block %}
 
 {% block title_block %}
   InfoExtracT
 {% endblock title_block %}
 
+{% block header_block %}
+  <div class="container header-block">
+    <h1 class="loader">#urdujaph</h1>
+  </div>
+{% endblock header_block %}
+
 {% block main_block %}
-<h1>Main Page</h1>
-<a href="{% url 'login_app:user_logout' %}">logout</a>
+
+  <div class="container main-block">
+
+    <h6>Categories</h6>
+    <div class="categories">
+      <div class="row">
+
+        <div class="col col-lg-3 d-flex justify-content-center">
+          <div style="text-align:center">
+            <div class="circle CA" style="border: 40px solid #F7474A">81</div>
+            Casualty & Damage (CD)
+          </div>
+        </div>
+
+        <div class="col col-lg-3 d-flex justify-content-center">
+          <div style="text-align:center">
+            <div class="circle CA" style="border: 40px solid #FFB55E">100</div>
+            Caution & Advice (CA)
+          </div>
+        </div>
+
+        <div class="col col-lg-3 d-flex justify-content-center">
+          <div style="text-align:center">
+            <div class="circle donation" style="border: 40px solid #48BEBE">995</div>
+            Donation
+          </div>
+        </div>
+
+        <div class="col col-lg-3 d-flex justify-content-center">
+          <div style="text-align:center">
+            <div class="circle other" style="border: 40px solid #4F535F">850</div>
+            Other
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="container">
+    <h6>Statistics</h6>
+    <div class="categories d-flex justify-content-center">
+      <div style="width:80%">
+        <canvas id="barchart" height="400" width="800"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h6>Classify</h6>
+    <div style="padding:20px 0 20px 20px;" class="categories">
+      <div class="row">
+
+        <div class="col-lg-6">
+          <form action="" method="POST">
+            <label for="text">Enter text to classify</label>
+            <input class="form-control" type="text" name="text" id="txttext" placeholder="Classify">
+            <input class="btn btn-primary" type="button" value="Classify">
+          </form>
+
+        </div>
+
+        <div class="col-lg-6">
+          
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
 {% endblock main_block %}
+
+{% block sub-footer_block %}
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4">
+        <h2>LOGO HERE</h2>
+      </div>
+      <div class="col-lg-4">
+        <h2>LINKS TO SETTINGS</h2>
+      </div>
+      <div class="col-lg-4">
+        <h3>LINKS TO RESOURCES</h3>
+      </div>
+    </div>    
+  </div>
+        
+{% endblock sub-footer_block %}

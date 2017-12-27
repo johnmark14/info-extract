@@ -1,0 +1,121 @@
+
+body {
+    background:#F5F7FA;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  h1 {
+    text-align: center;
+    font-weight: bold;
+    color: #337AB7;
+    font-size: 10em; 
+    text-decoration: underline;
+  }
+  
+  h6 {
+    color: #424D52;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    margin: 10px 0;
+    background: #337AB7;
+}
+  
+  .header-block {
+    padding-bottom: 2.3em;
+  }
+  
+  .container, .container-fluid {
+    border: 1px solid black;
+    padding-top: 20px;
+  }
+  
+  .categories {
+    border-radius: 5px;
+    padding: 15px 10px;
+    background: white;
+    box-shadow: 0 4px 8px 0 rgba(100, 100, 100, 0.2), 
+      0 6px 20px 0 rgba(100, 100, 100, 0.2);
+  }
+  
+  .circle {
+    width: 200px;
+    height: 200px;
+    margin: 10px 0;
+    line-height: 120px;
+    font-size: 21px;
+    font-weight: bold;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(100, 100, 100, 0.2), 
+      0 6px 20px 0 rgba(100, 100, 100, 0.2);
+  }
+  
+  .footer {
+      width: 100%;
+      margin-top: 30px;
+      /* Set the fixed height of the footer here */
+      line-height: 60px; /* Vertically center the text there */
+    }
+
+    .main-footer {
+      height: 60px;
+      background-color: #333335;
+    }
+
+    .sub-footer {
+      padding: 30px;
+      height: 200px;
+      background-color: #3C3D41;
+    }
+
+  @media screen and (max-width: 998px) {
+      h1 {
+          font-size:6em;
+      }
+  }
+  
+  @media screen and (max-width: 768px) {
+      h1 {
+          font-size:6em;
+      }
+  }
+
+  @media screen and (max-width: 568px) {
+    h1 {
+  font-size:6em;
+  }
+  }
+
+  @media screen and (max-width: 500px) {
+    h1 {
+  font-size:5em;
+  }
+  }
+
+  @media screen and (max-width: 400px) {
+    h1 {
+  font-size:4em;
+  }
+  }
+
+  @media screen and (max-width: 300px) {
+    h1 {
+  font-size:3em;
+  }
+  }
+
+  @media screen and (max-width: 200px) {
+    h1 {
+  font-size:2em;
+  }
+  }
+
+  @media screen and (max-width: 100px) {
+    h1 {
+  font-size:1em;
+  }
+  }
+    
