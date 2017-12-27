@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!--BOOTSTRAP CDN-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" 
+    integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- Google open sans fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/05d211e6ee.js"></script>
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+    <title>Login</title>
+</head>
+<body>
+
+    <header>
+
+        <div class="d-flex p-2 justify-content-center" id="brand">
+
+            <img src="{% static 'img/brand.png' %}" height="59px" width="250px" alt="site logo">
+        
+        </div>
+
+    </header>
+
+    <main>
+        
+        <div class="container">
+
+            <h2>Login</h2>
+
+            <!-- Form -->
+            <form id="form_login" method="POST">
+                {% csrf_token %}
+
+                <!-- Form Group -->
+                <div class="form-group">
+
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Username">
+                    </div>
+
+                    <div class="input-group adm">
+                        <div class="input-group-addon"><span class="fa fa-lock"></span></div>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                    </div>
+
+                    <a class="link" href> Forgot your password? </a>
+                    <br>
+                    <input id="btnsubmit" type="button" value="Login" class="btn btn-primary btn-lg center-block">
+
+                </div>
+                 <!-- Form Group -->
+                 
+            </form>
+            <!-- Form -->
+
+    </main>
+
+    <footer class="page-footer">
+        Don’t have an account?
+        <a id="signup-link" href="{% url 'login_app:user_signup' %}">Sign Up Here</a>
+    </footer>
+
+    <script src = " {% static 'js/master.js' %}"></script>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

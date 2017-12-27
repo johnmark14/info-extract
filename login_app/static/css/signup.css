@@ -1,0 +1,53 @@
+
+/*
+    Login.html
+*/
+
+body {
+    background:#F5F7FA;
+    font-family: 'Open Sans', sans-serif;
+}
+
+h2 {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #424D52;
+}
+
+main > .container {
+    margin-top: 40px; 
+    width: 600px;
+    padding-top: 42px;
+    padding-left: 42px;
+    padding-right: 40px;
+    padding-bottom: 0;
+    border-radius: 5px;
+    background: white;   
+    box-shadow: 0 4px 8px 0 rgba(100, 100, 100, 0.2), 
+    0 6px 20px 0 rgba(100, 100, 100, 0.2);
+}
+
+.errorlist {
+    color:red;
+    padding: 0;
+    text-align: center;
+    list-style: none;
+    list-style-type: none;
+
+}
+
+.btn {
+    margin: 20px 0 35px;
+    border-radius: 25px;
+    width: 100%;
+    background: #337AB7;
+}
+
+.btn:hover {
+    background: #286090;
+}
+
+#brand {
+    margin: 50px 0 30px;
+}

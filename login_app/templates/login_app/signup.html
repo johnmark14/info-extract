@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!--BOOTSTRAP CDN-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" 
+    integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- Google open sans fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/05d211e6ee.js"></script>
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+
+    <title>SignUp</title>
+</head>
+<body>
+
+    <header>
+        <div class="d-flex p-2 justify-content-center" id="brand">
+
+            <img src="{% static 'img/brand.png' %}" height="59px" width="250px" alt="site logo">
+        
+        </div>
+    </header>
+
+    <main>
+        <div class="container jumbotron">
+            <h2>Sign Up</h2>
+            {% if mismatch %}
+                <ul class="errorlist">
+                    <li>Password mismatch, please verify your password.</li>
+                </ul>
+            {% endif %}
+
+            {% if  ok %}
+
+            <script>
+                window.alert("ok it was save!")
+            </script>
+              
+            {% endif %}
+
+            {% if user.is_authenticated %}
+              <a href="{% url 'login_app:user_logout' %}">logout</a>
+            {% endif %}
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ user_form.as_p }}
+                <button type="submit" class="btn btn-primary" style="width:100%">Login</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        
+    </footer>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
