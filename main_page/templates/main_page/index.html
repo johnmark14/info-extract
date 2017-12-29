@@ -17,52 +17,70 @@
 {% endblock header_block %}
 
 {% block main_block %}
-
+  <!--container1-->
   <div class="container main-block">
 
     <h6>Categories</h6>
+    <!--categories1-->
     <div class="categories">
+      <!--row-->
       <div class="row">
 
+        <!--col-1-->
         <div class="col col-lg-3 d-flex justify-content-center">
           <div style="text-align:center">
             <div class="circle CA" style="border: 40px solid #F7474A">81</div>
             Casualty & Damage (CD)
           </div>
         </div>
+        <!--col-1-->
 
+        <!--col-2-->
         <div class="col col-lg-3 d-flex justify-content-center">
           <div style="text-align:center">
             <div class="circle CA" style="border: 40px solid #FFB55E">100</div>
             Caution & Advice (CA)
           </div>
         </div>
+        <!--col-2-->
 
+        <!--col-3-->
         <div class="col col-lg-3 d-flex justify-content-center">
           <div style="text-align:center">
             <div class="circle donation" style="border: 40px solid #48BEBE">995</div>
             Donation
           </div>
         </div>
+        <!--col-3-->
 
+        <!--col-4-->
         <div class="col col-lg-3 d-flex justify-content-center">
           <div style="text-align:center">
             <div class="circle other" style="border: 40px solid #4F535F">850</div>
             Other
           </div>
         </div>
+        <!--col-4-->
 
       </div>
+      <!--row-->
 
     </div>
+    <!--categories1-->
 
   </div>
+  <!--container1-->
 
+  <!--container2-->
   <div class="container">
     <h6>Statistics</h6>
+
+    <!--categories2-->
     <div class="categories">
       
+      <!--row1-->
       <div class="row" style="border:1px solid black; margin-bottom:10px;">
+        <!--col-1-->
         <div class="col-lg-12 d-flex justify-content-center">
           <div id="bar-id" style="width:80%">
             <canvas id="barchart" height="400" width="800"></canvas>
@@ -74,9 +92,13 @@
             <canvas id="radarchart" height="400" width="800"></canvas>
           </div>
         </div>
+        <!--col-1-->
       </div>
+      <!--row1-->
 
+      <!--row2-->
       <div class="row" style="border:1px solid black; padding-top: 5px;">
+        <!--col-2-->
         <div class="col-lg-12 d-flex justify-content-center">
           <form>
             <label class="radio-inline">
@@ -90,32 +112,67 @@
             </label>
           </form>
         </div>
+         <!--col-2-->
       </div>
+      <!--row2-->
     </div>
-  </div>
+    <!--categories2-->
 
+  </div>
+  <!--container2-->
+
+  <!--container3-->
   <div class="container">
     <h6>Classify</h6>
-    <div style="padding:20px" class="categories">
+    <!--custom-style-->
+    <div style="padding:20px 20px 30px 20px" class="categories">
+      <!-- row-main-->
       <div class="row">
-
-        <div class="col-lg-6" style="border:1px solid black;">
-          
+        <!--col-1-item-->
+        <div class="col-md-6">
           <form action="" method="POST">
             <label for="text">Enter text to classify</label>
             <input class="form-control" type="text" name="text" id="txttext" placeholder="Classify">
             <input class="btn btn-primary" type="button" value="Classify">
           </form>
-
+          <H3 id="category" style="text-align:center">--</H3>
         </div>
+        <!--col-1-item-->
 
-        <div class="col-lg-6" style="border: 1px solid black;">
-          
+        <!--col-2-item-->
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-lg-6 d-flex justify-content-center doughnut">
+              <div style="width:100%">
+                <canvas id="doughnut" width="200" height="180"></canvas>
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-center">
+              <ul class="legend">
+                <h6> Statistics </h6>
+                <li>
+                  <em id="feature">Features</em>
+                  <span>5</span>
+                </li>
+                <li>
+                  <em id="accuracy">Accuracy</em>
+                  <span>0.83</span>
+                </li>
+                <li>
+                  <em id="probability">Probability</em>
+                  <span>0.63</span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
+        <!--col-2-item-->
       </div>
-      </div>
+      <!-- row-main-->
     </div>
+    <!--custom-style-->
   </div>
+  <!--container3-->
 
 {% endblock main_block %}
 
@@ -124,7 +181,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-4">
-        <h2>LOGO HERE</h2>
+        <img src="{% static 'img/brand-white.png' %}" height="59px" width="250px" alt="site logo">
       </div>
       <div class="col-lg-4">
         <h2>LINKS TO SETTINGS</h2>
