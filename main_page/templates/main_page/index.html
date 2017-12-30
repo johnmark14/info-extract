@@ -28,37 +28,45 @@
 
         <!--col-1-->
         <div class="col col-lg-3 d-flex justify-content-center">
-          <div style="text-align:center">
-            <div class="circle CA" style="border: 40px solid #F7474A">81</div>
-            Casualty & Damage (CD)
-          </div>
+          <a href="#">
+            <div style="text-align:center">
+              <div class="circle CA" style="border: 40px solid #F7474A">81</div>
+              Casualty & Damage (CD)
+            </div>
+          </a>
         </div>
         <!--col-1-->
 
         <!--col-2-->
         <div class="col col-lg-3 d-flex justify-content-center">
-          <div style="text-align:center">
-            <div class="circle CA" style="border: 40px solid #FFB55E">100</div>
-            Caution & Advice (CA)
-          </div>
+          <a href="#">
+            <div style="text-align:center">
+              <div class="circle CA" style="border: 40px solid #FFB55E">100</div>
+              Caution & Advice (CA)
+            </div>
+          </a>
         </div>
         <!--col-2-->
 
         <!--col-3-->
         <div class="col col-lg-3 d-flex justify-content-center">
-          <div style="text-align:center">
-            <div class="circle donation" style="border: 40px solid #48BEBE">995</div>
-            Donation
-          </div>
+          <a href="#">
+            <div style="text-align:center">
+              <div class="circle donation" style="border: 40px solid #48BEBE">995</div>
+              Donation
+            </div>
+          </a>
         </div>
         <!--col-3-->
 
         <!--col-4-->
         <div class="col col-lg-3 d-flex justify-content-center">
-          <div style="text-align:center">
-            <div class="circle other" style="border: 40px solid #4F535F">850</div>
-            Other
-          </div>
+          <a href="#">
+            <div style="text-align:center">
+              <div class="circle other" style="border: 40px solid #4F535F">850</div>
+              Other
+            </div>
+          </a>
         </div>
         <!--col-4-->
 
@@ -79,7 +87,7 @@
     <div class="categories">
       
       <!--row1-->
-      <div class="row" style="border:1px solid black; margin-bottom:10px;">
+      <div class="row" style="margin-bottom:10px;">
         <!--col-1-->
         <div class="col-lg-12 d-flex justify-content-center">
           <div id="bar-id" style="width:80%">
@@ -97,7 +105,7 @@
       <!--row1-->
 
       <!--row2-->
-      <div class="row" style="border:1px solid black; padding-top: 5px;">
+      <div class="row" style="padding-top: 5px;">
         <!--col-2-->
         <div class="col-lg-12 d-flex justify-content-center">
           <form>
@@ -130,41 +138,53 @@
       <div class="row">
         <!--col-1-item-->
         <div class="col-md-6">
-          <form action="" method="POST">
-            <label for="text">Enter text to classify</label>
-            <input class="form-control" type="text" name="text" id="txttext" placeholder="Classify">
-            <input class="btn btn-primary" type="button" value="Classify">
+          <form id="form_classify" class="ajax-classify" method="POST" data-url="{{ request.build_absolute_uri|safe }}">
+            {% csrf_token %}
+            {{ form.as_p|safe }}
+            <input id="btnsubmit" class="btn btn-primary" type="submit" value="Classify">
           </form>
-          <H3 id="category" style="text-align:center">--</H3>
+          <!--lbl-category-->
+          <div style="margin-top: 30px; ">
+            <h2 id="lblcategory" style="text-align:center"h>--</h2>
+          </div>
+          <!--lbl-category-->
         </div>
         <!--col-1-item-->
 
         <!--col-2-item-->
         <div class="col-md-6">
+
+          <!--col-2-row-->
           <div class="row">
+            <!--col2-row-col1-->
             <div class="col-lg-6 d-flex justify-content-center doughnut">
               <div style="width:100%">
                 <canvas id="doughnut" width="200" height="180"></canvas>
               </div>
             </div>
+            <!--col2-row-col1-->
+
+            <!--col2-row-col2-->
             <div class="col-lg-6 d-flex justify-content-center">
               <ul class="legend">
                 <h6> Statistics </h6>
                 <li>
                   <em id="feature">Features</em>
-                  <span>5</span>
+                  <span id="feature-val">--</span>
                 </li>
                 <li>
                   <em id="accuracy">Accuracy</em>
-                  <span>0.83</span>
+                  <span id="accuracy-val">--</span>
                 </li>
                 <li>
                   <em id="probability">Probability</em>
-                  <span>0.63</span>
+                  <span id="probability-val">--</span>
                 </li>
               </ul>
             </div>
+            <!--col2-row-col2-->
           </div>
+          <!--col-2-row-->
         </div>
         <!--col-2-item-->
       </div>

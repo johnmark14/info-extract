@@ -1,35 +1,14 @@
-const BARCHART = document.getElementById('barchart');
-const LINECHART = document.getElementById('linechart');
-const RADARCHART = document.getElementById('radarchart');
-const DOUGHNUTCHART = document.getElementById('doughnut');
+// Global
+let DOUGHCHART
 
-const BARCLASS = document.getElementById("bar-id");
-const LINECLASS = document.getElementById("line-id");
-const RADARCLASS = document.getElementById("radar-id");
+// Radio button Bar graph
+$('#bar').click( function() {
 
-const BAR = document.getElementById('bar');
-const LINE = document.getElementById('line');
-const RADAR = document.getElementById('radar');
+    $("#bar-id").css("display","block");
+    $("#line-id").css("display", "none");
+    $("#radar-id").css("display", "none");
 
-const FEATURE = document.getElementById('feature');
-const ACCURACY = document.getElementById('accuracy');
-const PROBABILITY = document.getElementById('probability');
-
-let category = document.getElementById('category');
-
-//Category
-const CD = "Casualty & Damage";
-const CA = "Caution & Advice";
-const DONATION = "Donation";
-const OTHER = "Other";
-
-BAR.onclick = () => {
-
-    BARCLASS.style.display = 'block';
-    LINECLASS.style.display = 'none';
-    RADARCLASS.style.display = 'none';
-
-    let barChart = new Chart(BARCHART, {
+    let barChart = new Chart($('#barchart'), {
         type: "bar",
         data: {
             labels: ["CD", "CA", "Donation", "Other"],
@@ -66,15 +45,15 @@ BAR.onclick = () => {
             },
         }
     });
-}
+})
 
-LINE.onclick = () => {
+$('#line').click(function() {
 
-    LINECLASS.style.display = 'block'
-    BARCLASS.style.display = 'none';
-    RADARCLASS.style.display = 'none';
+    $("#line-id").css("display", "block");
+    $("#bar-id").css("display","none");
+    $("#radar-id").css("display", "none");
 
-    let lineChart = new Chart(LINECHART, {
+    let lineChart = new Chart($('#linechart'), {
         type: "line",
         data: {
             labels: ["CD", "CA", "Donation", "Other"],
@@ -120,26 +99,25 @@ LINE.onclick = () => {
             },
         }
     });
-}
+})
 
-function doughnutStat(d1,d2,d3) {
+$('#radar').click(function() {
+    window.alert('log')
+})
 
-    let randomScalingFactor = () => {
-        return Math.round(Math.random() * 100);
-    }
+// function for doughnut
+function doughnutStat(featureVal,accuracyVal,probabilityVal) {
+
+    // colors used in doughnut
+    const red = "#F7474A", orange = "#FFB55E",  green = "#48BEBE"
     
-    let doughChart = new Chart(DOUGHNUTCHART, {
+    DOUGHCHART = new Chart($("#doughnut"), {
         type: 'doughnut',
         data: {
             labels: ['Features', 'Accuracy', 'Probability'],
             datasets: [{
-                data: [
-                    d1, d2, d3],
-                backgroundColor: [
-                    '#F7474A',
-                    '#FFB55E',
-                    '#48BEBE',
-                ],
+                data: [featureVal, accuracyVal, probabilityVal],
+                backgroundColor: [red,orange,green],
                 label: 'Dataset 1'
             }],
         },
@@ -159,20 +137,57 @@ function doughnutStat(d1,d2,d3) {
         }
     });
 
-    FEATURE.style.borderLeft = "2.5em solid #F7474A";
-    FEATURE.style.paddingLeft ="0.5em";
-    ACCURACY.style.borderLeft = "2.5em solid #FFB55E";
-    ACCURACY.style.paddingLeft = "0.5em";
-    PROBABILITY.style.borderLeft = "2.5em solid #48BEBE";
-    PROBABILITY.style.paddingLeft = "0.5em";
+    // add styles to statistics 
+    $('#feature').css({"border-left": "1.25em solid " + red, "padding-left":"10px"})
+    $('#accuracy').css({"border-left": "1.25em solid " + orange, "padding-left":"10px"})
+    $('#probability').css({"border-left": "1.25em solid " + green, "padding-left":"10px"})
 
-    category.innerHTML = CA;
+    // change the value of statistics
+    $('#feature-val').html(featureVal)
+    $('#accuracy-val').html(accuracyVal)
+    $('#probability-val').html(probabilityVal)
+
 }
 
-BAR.click();
-doughnutStat(5,0.83,0.63);
+// Classify button
+function classify() {
+
+    let myForm = $('.ajax-classify')
+    myForm.submit(function(event) {
+        event.preventDefault()
+        let formData = $(this).serialize()
+        let thisURL = myForm.attr('data-url') || window.location.href // or set my own data-URL
+        $.ajax({
+            method: "POST",
+            url: thisURL,
+            data: formData,
+            success: handleFormSuccess
+        })
+    })
+
+    function handleFormSuccess(data, textStatus, jqXHR) {
+        $("#lblcategory").text(data['result'])
+        DOUGHCHART.destroy()
+        doughnutStat(data['features'],data['accuracy'],data['prob_dist'])
+        //myForm[0].reset();
+    }
+
+}
 
 
+
+
+// Trigger events to populate the canvas
+$(document).ready(function() {
+    // trigger bar graph
+    $('#bar').click()
+
+    // call function to trigger doughnut graph
+    doughnutStat(5,10,15)
+
+    // call function classify that if button is click this will execute
+    classify()
+})
 
 
 
