@@ -1,5 +1,8 @@
 // Global
 let DOUGHCHART
+let BARCHART
+let LINECHART
+let RADARCHART
 let CD = 0, CA = 0, DONATION = 0, OTHER = 0
 
 // function for Bar Graph
@@ -9,7 +12,7 @@ function barGraph(d1,d2,d3,d4) {
     $("#line-id").css("display", "none");
     $("#radar-id").css("display", "none");
 
-    let barChart = new Chart($('#barchart'), {
+    BARCHART = new Chart($('#barchart'), {
         type: "bar",
         data: {
             labels: ["CD", "CA", "Donation", "Other"],
@@ -51,7 +54,7 @@ function lineGraph(d1,d2,d3,d4) {
     $("#bar-id").css("display","none");
     $("#radar-id").css("display", "none");
 
-    let lineChart = new Chart($('#linechart'), {
+    LINECHART = new Chart($('#linechart'), {
         type: "line",
         data: {
             labels: ["CD", "CA", "Donation", "Other"],
@@ -114,7 +117,7 @@ function radarGraph(d1,d2,d3,d4) {
     $("#line-id").css("display", "none");
     $("#bar-id").css("display","none");
 
-    let radarChart = new Chart($('#radarchart'), {
+    RADARCHART = new Chart($('#radarchart'), {
         type: 'radar',
         data: {
             labels: ["CD", "CA", "DONATION", "OTHER"],
@@ -210,7 +213,7 @@ function classify() {
     }
 }
 
-// function to fetch data from the database
+// function to fetch data from the database on load time
 function categoryFetcher() {
 
     $.ajax({
@@ -229,13 +232,56 @@ function categoryFetcher() {
        // trigger bar graph
        barGraph(CD,CA,DONATION,OTHER)
 
-       // Set the category color code value
+       // Set the category value
        $('#cd').text(CD)
        $('#ca').text(CA)
        $('#donation').text(DONATION)
        $('#other').text(OTHER)
     }
 
+}
+
+// function interval category fetcher
+function getCategoryData() {
+    setInterval (function() {
+        $.ajax({
+            method: "GET",
+            url: window.location.href,
+            success: handleFormSuccess
+        })
+
+        function handleFormSuccess(data, textStatus, jqXHR) {
+            if (CD !== data['cd'] || CA !== data['ca'] || DONATION !== data['donation'] || OTHER !== data['other']){
+                CD = data['cd']
+                CA = data['ca']
+                DONATION = data['donation']
+                OTHER = data['other']
+
+                // Set the category value
+                $('#cd').text(CD)
+                $('#ca').text(CA)
+                $('#donation').text(DONATION)
+                $('#other').text(OTHER)
+
+                // trigger graph
+
+                if($('#bar').is(':checked')) {
+                    BARCHART.destroy()
+                    barGraph(CD,CA,DONATION,OTHER)
+                }
+
+                if ($('#line').is(':checked')) {
+                    LINECHART.destroy()
+                    lineGraph(CD,CA,DONATION,OTHER)
+                }
+
+                if($('#radar').is(':checked')) {
+                    RADARCHART.destroy()
+                    radarGraph(CD,CA,DONATION,OTHER)
+                }
+            }
+        }
+    }, 20000)
 }
 
 // Radio button Bar graph
@@ -253,14 +299,10 @@ $('#radar').click(function() {
     radarGraph(CD, CA, DONATION, OTHER)
 })
 
-
-
-
-
 // Trigger events to populate the canvas
 $(document).ready(function() {
 
-    // Fetch the data from the datatabase
+    // Fecth data from the database
     categoryFetcher()
 
     // call function to trigger doughnut graph
@@ -272,6 +314,9 @@ $(document).ready(function() {
 
     //call the click button
     $('#bar').click()
+
+    // Datbase checker
+   // getCategoryData()
     
 })
 
