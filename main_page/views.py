@@ -1,15 +1,14 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.generic import FormView
+from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from main_page.forms import ClassifyForm
+from main_page.models import CategoriesCount, CasualtyDamage, CautionAdvise, Donation, Other
 from textblob.classifiers import NaiveBayesClassifier
 
-# Create your views here.
-
 # Categorization
-
 train = [ ('I love this sandwich.', 'Positive'),
 ('this is an amazing place!', 'Positive'),
 ('I feel very good about these beers.', 'Positive'),
@@ -31,20 +30,36 @@ test = [('the beer was good.', 'Positive'),
 cl = NaiveBayesClassifier(train)
 
 # Home/
-class ClassifyFormView(LoginRequiredMixin, FormView):
-    form_class = ClassifyForm
-    template_name = 'main_page/index.html'
-    success_url = '/form-success/'
+class MainPage(LoginRequiredMixin, FormView):
+
+    form_class      =   ClassifyForm
+    template_name   =   'main_page/index.html'
+    success_url     =   '/form-success/'
+
+    def get(self, request):
+        form = ClassifyForm()
+        cat_count       =   CategoriesCount.objects.all()
+
+        if self.request.is_ajax():
+            data        =   {'cd'       :   cat_count[0].n_casualty_damage,
+                            'ca'        :   cat_count[0].n_caution_advise,
+                            'donation'  :   cat_count[0].n_donation,
+                            'other'     :   cat_count[0].n_other}
+            return JsonResponse(data)
+        else:
+            return render(request, self.template_name ,{'form':form})
+
+        return render(request, self.template_name ,{'form':form})
 
     def form_invalid(self, form):
-        response = super(ClassifyFormView, self).form_invalid(form)
+        response        =   super(MainPage, self).form_invalid(form)
         if self.request.is_ajax():
             return JsonResponse(form.errors, status=400)
         else:
             return response
 
     def form_valid(self, form):
-        response = super(ClassifyFormView, self).form_valid(form)
+        response        =   super(MainPage, self).form_valid(form)
         if self.request.is_ajax():
             text_to_classify        =   form.cleaned_data.get('txttext')
             text_result             =   cl.classify(text_to_classify)
@@ -59,15 +74,19 @@ class ClassifyFormView(LoginRequiredMixin, FormView):
             print(text_features)
 
             data = {
-                'result': text_result,
-                'features': text_features,
-                'accuracy': text_accuracy,
-                'prob_dist': text_prob_dist
+                'result'        :   text_result,
+                'features'      :   text_features,
+                'accuracy'      :   text_accuracy,
+                'prob_dist'     :   text_prob_dist
             }
 
             return JsonResponse(data)
         else:
             return response
+    
+    
+
+    
 '''
 @login_required
 def index(request)

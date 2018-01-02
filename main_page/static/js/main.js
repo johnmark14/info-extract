@@ -1,8 +1,9 @@
 // Global
 let DOUGHCHART
+let CD = 0, CA = 0, DONATION = 0, OTHER = 0
 
-// Radio button Bar graph
-$('#bar').click( function() {
+// function for Bar Graph
+function barGraph(d1,d2,d3,d4) {
 
     $("#bar-id").css("display","block");
     $("#line-id").css("display", "none");
@@ -13,7 +14,7 @@ $('#bar').click( function() {
         data: {
             labels: ["CD", "CA", "Donation", "Other"],
             datasets: [{
-                data: [12, 19, 3, 5, 2, 3],
+                data: [d1,d2,d3,d4],
                 backgroundColor: [
                     '#F7474A',
                     '#FFB55E',
@@ -35,19 +36,16 @@ $('#bar').click( function() {
                 }]
             },
             responsive: true,
-            animation: {
-                animationScale: true,
-                animationRotate:true
-            },
             title: {
                 display: true,
                 text: 'Bar CHart'
             },
         }
     });
-})
+}
 
-$('#line').click(function() {
+// function for Line Graph
+function lineGraph(d1,d2,d3,d4) {
 
     $("#line-id").css("display", "block");
     $("#bar-id").css("display","none");
@@ -59,10 +57,10 @@ $('#line').click(function() {
             labels: ["CD", "CA", "Donation", "Other"],
             datasets: [{
                 fill: true,
-                data: [12, 19, 3, 5, 2, 3],
+                data: [d1,d2,d3,d4],
                 backgroundColor: "rgba(75, 192, 192, 0.4)",
                 borderColor: "rgba(75, 192, 192, 1)",
-                borderCapstyle: 'butt',
+                borderCapstyle: 'round',
                 borderDash: [],
                 borderDashOffset: 0.0,
                 borderJoinStyle: 'miter',
@@ -82,7 +80,17 @@ $('#line').click(function() {
                 display: false,
             },
             scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true
+                    }
+                }],
                 yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true
+                    },
                     ticks: {
                         beginAtZero:true
                     }
@@ -97,13 +105,53 @@ $('#line').click(function() {
                 display: true,
                 text: 'Line CHart'
             },
+            tooltips: {
+                mode: 'nearest',
+                intersect: true
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            }
+
         }
     });
-})
+}
 
-$('#radar').click(function() {
-    window.alert('log')
-})
+// function for Radar Graph
+function radarGraph(d1,d2,d3,d4) {
+    $("#radar-id").css("display", "block");
+    $("#line-id").css("display", "none");
+    $("#bar-id").css("display","none");
+
+    let radarChart = new Chart($('#radarchart'), {
+        type: 'radar',
+        data: {
+            labels: ["CD", "CA", "DONATION", "OTHER"],
+            datasets: [{
+                backgroundColor: "rgba(75, 192, 192, 0.4)",
+                borderColor: "rgba(75, 192, 192, 1)",
+                pointBackgroundColor: "rgba(75, 192, 192, 1)",
+                data: [d1,d2,d3,d4]
+            }]
+        },
+        options: {
+            legend: {
+                display: false,
+            },
+            title: {
+                display: true,
+                text: 'Radar Chart'
+            },
+            scale: {
+              ticks: {
+                beginAtZero: true
+              }
+            }
+        }
+    })
+
+}
 
 // function for doughnut
 function doughnutStat(featureVal,accuracyVal,probabilityVal) {
@@ -149,9 +197,51 @@ function doughnutStat(featureVal,accuracyVal,probabilityVal) {
 
 }
 
-// Classify button
-function classify() {
+// function to fetch data from the database
+function categoryFetcher() {
 
+    $.ajax({
+        method: "GET",
+        url: window.location.href,
+        success: handleFormSuccess
+    })
+
+    function handleFormSuccess(data, textStatus, jqXHR) {
+        // Fetch the data from the database 
+       CD = data['cd']
+       CA = data['ca']
+       DONATION = data['donation']
+       OTHER = data['other']
+
+       // trigger bar graph
+       barGraph(CD,CA,DONATION,OTHER)
+
+       // Set the category color code value
+       $('#cd').text(CD)
+       $('#ca').text(CA)
+       $('#donation').text(DONATION)
+       $('#other').text(OTHER)
+    }
+
+}
+
+// Radio button Bar graph
+$('#bar').click( function() {
+    barGraph(CD, CA, DONATION, OTHER)
+})
+
+// Radio button Line Graph
+$('#line').click(function() {
+    lineGraph(CD, CA, DONATION, OTHER)
+})
+
+// Radio button Radar Graph
+$('#radar').click(function() {
+    radarGraph(CD, CA, DONATION, OTHER)
+})
+
+// Classify button
+$('#btnsubmit').click(function() {
     let myForm = $('.ajax-classify')
     myForm.submit(function(event) {
         event.preventDefault()
@@ -171,22 +261,19 @@ function classify() {
         doughnutStat(data['features'],data['accuracy'],data['prob_dist'])
         //myForm[0].reset();
     }
-
-}
-
+})
 
 
 
 // Trigger events to populate the canvas
 $(document).ready(function() {
-    // trigger bar graph
-    $('#bar').click()
+
+    // Fetch the data from the datatabase
+    categoryFetcher()
 
     // call function to trigger doughnut graph
     doughnutStat(5,10,15)
-
-    // call function classify that if button is click this will execute
-    classify()
+    
 })
 
 
