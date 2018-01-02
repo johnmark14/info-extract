@@ -197,19 +197,64 @@
 {% endblock main_block %}
 
 {% block sub-footer_block %}
-
+  <!-- container-fluid-->
   <div class="container-fluid">
+    <!-- footer-row-->
     <div class="row">
-      <div class="col-lg-4 d-flex justify-content-center">
+
+      <!--col-1-->
+      <div class="col-lg-4 d-flex justify-content-center" style="margin-bottom: 20px">
         <img src="{% static 'img/brand-white.png' %}" height="59px" width="250px" alt="site logo">
       </div>
+      <!--col-1-->
+
+      <!--col-2-->
       <div class="col-lg-4 d-flex justify-content-center">
-        <h2>LINKS TO SETTINGS</h2>
+        <!--footer-link-1-->
+       <div class="footer-links">
+        <h5>More Settings</h5>
+        <p><a href="#">Train data</a></p>
+        <p><a href="#">Test data</a></p>
+        <p><a href="#">Text extractor</a></p>
+       </div>
+       <!--footer-link-1-->
+
+       <!--footer-link-2-->
+        <div class="footer-links">
+          <h5>More Information</h5>
+          <p><a href="#">Help</a></p>
+          <p><a href="#">Documentation</a></p>
+        </div>
+        <!--footer-link-2-->
+
       </div>
-      <div class="col-lg-4 d-flex justify-content-center">
-        <h3>LINKS TO RESOURCES</h3>
+      <!--col-2-->
+
+      <!--col-3-->
+      <div class="col-lg-4">
+        <!--github-->
+        <div class="github">
+          <a href="https://github.com/johnmark14/info-extract" target="blank">
+            <img src="{% static 'img/github.svg' %}" alt="github" height="30px" width="30px">
+             Github: InfoExtract project</a>
+        </div>
+        <!--github-->
+
+        <!--monkeylearn-->
+        <div class="monkeylearn">
+          <a href="https://monkeylearn.com/blog/practical-explanation-naive-bayes-classifier/" target="blank">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAEOklEQVR4Xu2bSUxTQRjH/0Nal3oQFYuBKJJoDBoNxO0iFFxqxBoapRc9iDc17iYeDEYwhHhTD0SNicjBeGgNFVuXQrQQYlwjbjHGFRNcAi4YjVgIY6bQ5oFt3zxa0unUHvu+N/N9v/nPvH878wiS/EOSvH78B8CjAPPaDZtBUqwUtJCApPLcE48YStFG0H/c475Yx9t/RAUUWq2p+j5dPQEp5G1QjDha6XE5KnhyCQuAFT+mV/8QBDN5GhItxqfrneR1Or+r5RUWgNliqwdgDTQwOyMbS+bkIX1SGsbpx6Ll6W20Prvnv2xeaMLqRUVqfY3q9d++Hpy9dgFvPrb7++kHLWpyObxqnYYEsKrYlktS8DBws2XJSizIzhnSlmgAWHLX79+E50HzYJ580yAkALOltAIgh1lLbORt+ZZ/QIoIoOXJbVy6dS16AKssNi8BTKylUKPPvhcRwKsP73Dy8rkBAJRe8rgdwSkcbiqEngIKAJuK1iPLmJkQClACoEBzo8uu+vSSCgAbpf2nB59+FO88bnv2yBbBBFXAEAAAPC67qtOVTgFV54/h289u/8DzeAHpANQ01GryAtIBYGboWfsLbjMkHQClGeqndG+T23E80kIoNQBA3Q1KB2CYGarzuB1lSaUArWZIOgWwX4XltUcH3TDaGt32vKRSgFYzJJ0CGAClGVJzg1IC0GKGpASgxQxJCUCLGZIegJoZkhKAFjMkPQC1f4akBKDFDEkJQIsZkhYArxmSFgCvGZIWAK8ZkhYArxlKCgCRzJC0AHjNUFIAiGSGpAXAa4ZGDODx2+dw3W3y/9u0bV0ZZmWId5AkuE8YYZtsxABY4S87XmN6+gxkpk1T24OMy3UeMxQVAHbz5NQpcSmOp1MeMyQ1AB4zJDWA+ltX0frkTsR9Qm4A3b9+4H1nBz597cTn7q6gAvU6HY8a4xLT0fUJPb4/A3sE/chrvGJvG56IKoDSZcVo/9yBey8fxaWIWHQalQ8Yqx+DP72+WOQRnzYorfPp+/aEOzSpqgBl1vPm5mBFoQlGY1p8ilHptbyiKhjBDkr26fra1E6LcgEYP96AvTu3YuniRUIWHkiqxLYxmJ/ajlAgkAvAwQP7hC+eFTQqAJjsqysPCT3yo6qAXdu3YkVRgb+PEzWncMPbkhAwYjYFqirKMX/eXH/RSomJTiEqAOa1pU4QUsKKVM7/BvdVNLiuoLPri+j1cx2SZEWEXASVp8WXm/Kxe8c24QuO7SI47H2BMzUnYDROFR5CzJ4CrFLlkfmZWVmoPlKOCYYJQkOILYBiWy4IvIRgIqvaYDCgxLIGy00FwqohpgD8Kii2lZEU1Ao97BzJUdDvhNAtnssXncPDQy6CyiD2/hAIdRJCsjj6EjckzBskqgACFfnVQKiVArmJBoNSdFNCraHeIuMGIO7QRpfZfwDR8Uv8u/8CXZFabrJZHt4AAAAASUVORK5CYII=" alt="icon"
+            height="30px" width="30px">
+            Read: Multinomial Naive Bayes</a>
+        </div>
+        <!--monkeylearn-->
+
       </div>
-    </div>    
+      <!--col-3-->
+
+    </div>
+    <!-- footer-row-->    
   </div>
+   <!-- container-fluid-->
         
 {% endblock sub-footer_block %}

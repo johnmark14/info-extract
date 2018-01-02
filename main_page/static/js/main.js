@@ -80,17 +80,8 @@ function lineGraph(d1,d2,d3,d4) {
                 display: false,
             },
             scales: {
-                xAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true
-                    }
-                }],
                 yAxes: [{
                     display: true,
-                    scaleLabel: {
-                        display: true
-                    },
                     ticks: {
                         beginAtZero:true
                     }
@@ -98,8 +89,7 @@ function lineGraph(d1,d2,d3,d4) {
             },
             responsive: true,
             animation: {
-                animationScale: true,
-                animationRotate:true
+                animationScale: true
             },
             title: {
                 display: true,
@@ -180,7 +170,7 @@ function doughnutStat(featureVal,accuracyVal,probabilityVal) {
             },
             title: {
                 display: true,
-                text: 'Doughnut CHart'
+                text: 'Doughnut Chart'
             },
         }
     });
@@ -195,6 +185,29 @@ function doughnutStat(featureVal,accuracyVal,probabilityVal) {
     $('#accuracy-val').html(accuracyVal)
     $('#probability-val').html(probabilityVal)
 
+}
+
+// function for classify button
+function classify() {
+    let myForm = $('.ajax-classify')
+    myForm.submit(function(event) {
+        event.preventDefault()
+        let formData = $(this).serialize()
+        let thisURL = myForm.attr('data-url') || window.location.href // or set my own data-URL
+        $.ajax({
+            method: "POST",
+            url: thisURL,
+            data: formData,
+            success: handleFormSuccess
+        })
+    })
+
+    function handleFormSuccess(data, textStatus, jqXHR) {
+        $("#lblcategory").text(data['result'])
+        DOUGHCHART.destroy()
+        doughnutStat(data['features'],data['accuracy'],data['prob_dist'])
+        //myForm[0].reset();
+    }
 }
 
 // function to fetch data from the database
@@ -240,28 +253,7 @@ $('#radar').click(function() {
     radarGraph(CD, CA, DONATION, OTHER)
 })
 
-// Classify button
-$('#btnsubmit').click(function() {
-    let myForm = $('.ajax-classify')
-    myForm.submit(function(event) {
-        event.preventDefault()
-        let formData = $(this).serialize()
-        let thisURL = myForm.attr('data-url') || window.location.href // or set my own data-URL
-        $.ajax({
-            method: "POST",
-            url: thisURL,
-            data: formData,
-            success: handleFormSuccess
-        })
-    })
 
-    function handleFormSuccess(data, textStatus, jqXHR) {
-        $("#lblcategory").text(data['result'])
-        DOUGHCHART.destroy()
-        doughnutStat(data['features'],data['accuracy'],data['prob_dist'])
-        //myForm[0].reset();
-    }
-})
 
 
 
@@ -273,6 +265,13 @@ $(document).ready(function() {
 
     // call function to trigger doughnut graph
     doughnutStat(5,10,15)
+
+    // call classify function
+    classify()
+
+
+    //call the click button
+    $('#bar').click()
     
 })
 

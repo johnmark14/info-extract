@@ -1,10 +1,12 @@
 
 body {
   background:#F5F7FA;
-  font-family: 'Open Sans', sans-serif;
+  /*font-family: 'Open Sans', sans-serif;*/
+  font-family: 'Lato', sans-serif;
 }
 
 h1 {
+  font-family: 'Open Sans', sans-serif;
   text-align: center;
   font-weight: bold;
   color: #337AB7;
@@ -113,10 +115,42 @@ h6 {
 }
 
 .sub-footer {
-  padding: 30px;
-  height: 250px;
+  padding: 30px 30px 50px;
   background-color: #3C3D41;
 }
+
+.footer-links {
+  width: 100%;
+}
+
+.footer-links h5 {
+  color: white;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.footer-links p {
+  line-height: 5px;
+  font-size: 13px;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-links .github {
+  padding: 0px;
+}
+
+
+/* Footer right element */
+.github a, .monkeylearn a {
+  color: white;
+  text-decoration: none;
+}
+
+
 
 @media screen and (max-width: 998px) {
   h1 {
