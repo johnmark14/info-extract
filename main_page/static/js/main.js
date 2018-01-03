@@ -309,6 +309,10 @@ $('#radar').click(function() {
     changeChart("radar",CD,CA,DONATION,OTHER)
 })
 
+// Modal button
+$('#train-data').click(function() {
+    $('#settings').modal()
+})
 // Trigger events to populate the canvas
 $(document).ready(function() {
 

@@ -143,6 +143,11 @@ h6 {
   padding: 0px;
 }
 
+.footer-links p {
+  color: white;
+  cursor: pointer;
+}
+
 
 /* Footer right element */
 .github a, .monkeylearn a {

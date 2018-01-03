@@ -18,16 +18,15 @@
 
 {% block main_block %}
 
-  <!--Modal-->
-  <div class="modal" tabindex="-1" role="dialog">
-    <!--Modal-Dialog-->
+  <!-- Modal -->
+  <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="Settings" aria-hidden="true">
+    <!--modal-dialog-->
     <div class="modal-dialog" role="document">
       <!--modal-content-->
       <div class="modal-content">
-        
         <!--modal-header-->
         <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Train data</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -36,22 +35,22 @@
 
         <!--modal-body-->
         <div class="modal-body">
-          <p>Modal body text goes here.</p>
+          
         </div>
         <!--modal-body-->
 
         <!--modal-footer-->
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Save changes</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
         <!--modal-footer-->
       </div>
       <!--modal-content-->
     </div>
-    <!--Modal-Dialog-->
+    <!--modal-dialog-->
   </div>
-  <!--Modal-->
+  <!-- Modal -->
 
   <!--container1-->
   <div class="container main-block">
@@ -243,17 +242,17 @@
         <!--footer-link-1-->
        <div class="footer-links">
         <h5>More Settings</h5>
-        <p><a href="#">Train data</a></p>
-        <p><a href="#">Test data</a></p>
-        <p><a href="#">Text extractor</a></p>
+        <p id="train-data" role="button">Train data</p>
+        <p id="test-data" role="button">Test data</p>
+        <p id="text-extractor" role="button">Text extractor</p>
        </div>
        <!--footer-link-1-->
 
        <!--footer-link-2-->
         <div class="footer-links">
           <h5>More Information</h5>
-          <p><a href="#">Help</a></p>
-          <p><a href="#">Documentation</a></p>
+          <p id="help" role="button">Help</p>
+          <p id="documentation" role="button">Documentation</p>
         </div>
         <!--footer-link-2-->
 
