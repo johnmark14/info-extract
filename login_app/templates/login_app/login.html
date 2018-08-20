@@ -39,10 +39,9 @@
 
             <!-- Form -->
             <form id="form_login" method="POST">
-                {% csrf_token %}
                 <!-- Form Group -->
                 <div class="form-group">
-
+                    {% csrf_token %}
                     <div class="input-group">
                         <div class="input-group-addon"><i class="fa fa-user"></i></div>
                         <input type="text" id="username" name="username" class="form-control" placeholder="Username">

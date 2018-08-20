@@ -5,6 +5,8 @@ let MYCHART
 //Category
 let CD = 0, CA = 0, DONATION = 0, OTHER = 0
 
+let QUERY
+
 // charts configurations
 let barConfig = {
     type: 'bar',
@@ -151,7 +153,7 @@ function changeChart(typ,d1,d2,d3,d4) {
 }
 
 // function for doughnut
-function doughnutStat(featureVal,accuracyVal,probabilityVal) {
+function doughnutStat(featureVal,accuracyVal,probabilityVal,featureCount) {
 
     // colors used in doughnut
     const red = "#F7474A", orange = "#FFB55E",  green = "#48BEBE"
@@ -188,7 +190,7 @@ function doughnutStat(featureVal,accuracyVal,probabilityVal) {
     $('#probability').css({"border-left": "1.25em solid " + green, "padding-left":"10px"})
 
     // change the value of statistics
-    $('#feature-val').html(featureVal)
+    $('#feature-val').html(featureCount)
     $('#accuracy-val').html(accuracyVal)
     $('#probability-val').html(probabilityVal)
 
@@ -212,7 +214,7 @@ function classify() {
     function handleFormSuccess(data, textStatus, jqXHR) {
         $("#lblcategory").text(data['result'])
         DOUGHCHART.destroy()
-        doughnutStat(data['features'],data['accuracy'],data['prob_dist'])
+        doughnutStat(data['features'],data['accuracy'],data['prob_dist'],data['feature_count'])
         //myForm[0].reset();
     }
 }
@@ -232,6 +234,7 @@ function categoryFetcher() {
         CA = data['ca']
         DONATION = data['donation']
         OTHER = data['other']
+        QUERY = data['query']
 
         // trigger bar graph
         changeChart("bar",CD,CA,DONATION,OTHER)
@@ -241,6 +244,7 @@ function categoryFetcher() {
        $('#ca').text(CA)
        $('#donation').text(DONATION)
        $('#other').text(OTHER)
+       $('#keyword').text(QUERY)
     }
 }
 
@@ -265,17 +269,23 @@ function getCategoryData() {
         })
 
         function handleFormSuccess(data, textStatus, jqXHR) {
+
+            QUERY = data['query']
+            $('#keyword').text(QUERY)
             if (CD !== data['cd'] || CA !== data['ca'] || DONATION !== data['donation'] || OTHER !== data['other']){
                 CD = data['cd']
                 CA = data['ca']
                 DONATION = data['donation']
                 OTHER = data['other']
+                
 
                 // Set the category value
                 $('#cd').text(CD)
                 $('#ca').text(CA)
                 $('#donation').text(DONATION)
                 $('#other').text(OTHER)
+                
+
 
                 // trigger graph
                 if($('#bar').is(':checked')) {
@@ -313,6 +323,11 @@ $('#radar').click(function() {
 $('#train-data').click(function() {
     $('#settings').modal()
 })
+
+$('#text-extractor').click(function() {
+    $('#extractor-settings').modal()
+})
+
 // Trigger events to populate the canvas
 $(document).ready(function() {
 
@@ -320,19 +335,15 @@ $(document).ready(function() {
     categoryFetcher()
 
     // call function to trigger doughnut graph
-    doughnutStat(5,10,15)
-
-    // call classify function
-    classify()
+    doughnutStat(5,10,15,5)
 
     //call the click button
     $('#bar').click()
 
     // Datbase checker
     getCategoryData()
-    
+
+    // call classify function
+    classify()
+
 })
-
-
-
-
